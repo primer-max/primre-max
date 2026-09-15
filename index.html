@@ -1,46 +1,32 @@
-<div class="content-area">
-        <label for="file-input" class="file-upload-box">
-            <span id="upload-text">📁 اضغط هنا لرفع الصور أو الملفات</span>
-            <input type="file" id="file-input" multiple onchange="handleFiles(this.files)">
-        </label>
-        <div id="file-list"></div>
-        <button class="send-btn" id="send-btn" onclick="sendData()">إرسال البيانات</button>
-    </div>
-</div>
-
-<script>
-    let currentLang = 'ar';
-
-    function toggleLanguage() {
-        if (currentLang === 'ar') {
-            currentLang = 'en';
-            document.getElementById('center-title').innerText = "Main Center";
-            document.getElementById('center-desc').innerText = "Advanced Data Management System";
-            document.getElementById('upload-text').innerText = "📁 Click to upload images or files";
-            document.getElementById('send-btn').innerText = "Send Data";
-            document.dir = "ltr";
-        } else {
-            currentLang = 'ar';
-            document.getElementById('center-title').innerText = "المركز الرئيسي";
-            document.getElementById('center-desc').innerText = "نظام إدارة وتحليل البيانات المتقدم";
-            document.getElementById('upload-text').innerText = "📁 اضغط هنا لرفع الصور أو الملفات";
-            document.getElementById('send-btn').innerText = "إرسال البيانات";
-            document.dir = "rtl";
+function sendMessage() {
+            const input = document.getElementById('message-input');
+            const messageText = input.value.trim();
+            
+            if (messageText !== '') {
+                const chatBox = document.getElementById('chat-box');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message sent';
+                messageDiv.textContent = messageText;
+                chatBox.appendChild(messageDiv);
+                
+                input.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
         }
-    }
 
-    function handleFiles(files) {
-        const list = document.getElementById('file-list');
-        list.innerHTML = "";
-        for (let file of files) {
-            list.innerHTML += <p style="font-size: 12px; color: #10b981;">✔️ ${file.name}</p>;
+        function handleFiles(files) {
+            const fileList = document.getElementById('file-list');
+            if (files.length > 0) {
+                let names = Array.from(files).map(f => f.name).join(', ');
+                fileList.textContent = names;
+            } else {
+                fileList.textContent = 'لم يتم اختيار أي ملف';
+            }
         }
-    }
 
-    function sendData() {
-        alert(currentLang === 'ar' ? "تم إرسال البيانات بنجاح!" : "Data sent successfully!");
-    }
-</script>
-
+        function sendData() {
+            alert('تم إرسال البيانات بنجاح!');
+        }
+    </script>
 </body>
 </html>
