@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق مراسلة</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { display: flex; height: 100vh; background-color: #f0f2f5; }
+        #app { display: flex; width: 100%; max-width: 800px; margin: auto; height: 90vh; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); flex-direction: column; }
+        header { background: #0084ff; color: white; padding: 15px; font-weight: bold; text-align: center; }
+        #chat-box { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .message { max-width: 70%; padding: 10px 14px; border-radius: 18px; font-size: 14px; word-wrap: break-word; }
+        .sent { background: #0084ff; color: white; align-self: flex-start; border-bottom-right-radius: 4px; }
+        .received { background: #e4e6eb; color: #050505; align-self: flex-end; border-bottom-left-radius: 4px; }
+        footer { display: flex; padding: 10px; background: #f0f2f5; gap: 8px; }
+        input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 20px; outline: none; }
+        button { background: #0084ff; color: white; border: none; padding: 10px 18px; border-radius: 20px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>تطبيق المحادثة</header>
+        <div id="chat-box">
+            <div class="message received">مرحباً بك! هذه واجهة التجربة الأولى.</div>
+        </div>
+        <footer>
+            <input type="text" id="message-input" placeholder="اكتب رسالتك هنا...">
+            <button onclick="sendMessage()">إرسال</button>
+        </footer>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('message-input');
+            const chatBox = document.getElementById('chat-box');
+            if (input.value.trim() !== '') {
+                const msg = document.createElement('div');
+                msg.className = 'message sent';
+                msg.textContent = input.value;
+                chatBox.appendChild(msg);
+                input.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
